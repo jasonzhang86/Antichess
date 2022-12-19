@@ -1,4 +1,5 @@
 import chess
+import numpy as np
 
 Pawn_Value = 100
 Knight_Value = 280
@@ -64,7 +65,16 @@ King_Square_Value = [4,  54,  47, -99, -99,  60,  83, -62,
             -4,   3, -14, -50, -57, -18,  13,   4,
             17,  30,  -3, -14,   6,  -1,  40,  18]
 
-Square_Value = [Pawn_Square_Value, Knight_Square_Value, Bishop_Square_Value, Rook_Square_Value, Queen_Square_Value, King_Square_Value]
+Pawn_Square_Matrix = np.array(Pawn_Square_Value).reshape((8, 8))
+Knight_Square_Matrix = np.array(Knight_Square_Value).reshape((8, 8))
+Bishop_Square_Matrix = np.array(Bishop_Square_Value).reshape((8, 8))
+Rook_Square_Matrix = np.array(Rook_Square_Value).reshape((8, 8))
+Queen_Square_Matrix = np.array(Queen_Square_Value).reshape((8, 8))
+King_Square_Matrix = np.array(King_Square_Value).reshape((8, 8))
+
+
+
+Square_Value = [Pawn_Square_Matrix, Knight_Square_Matrix, Bishop_Square_Matrix, Rook_Square_Matrix, Queen_Square_Matrix, King_Square_Matrix]
 
 def evaluation_function(board_fen, desired_player):
     # Here the evaluation function is respect to White
@@ -76,11 +86,13 @@ def evaluation_function(board_fen, desired_player):
         black_position_list = current_board.pieces(type, False)
         for pos in white_position_list:
             white_value += Chess_Value[type-1]
-            white_value += Square_Value[type-1][(7-(pos//8))*8 + (pos % 8)]
+            white_value += Square_Value[type-1][7-(pos//8)][pos % 8]
         for pos in black_position_list:
             black_value += Chess_Value[type-1]
-            black_value += Square_Value[type-1][(7-((63-pos)//8))*8 + ((63-pos) % 8)]
-    if desired_player == True: # If AI player is White
+            black_value += Square_Value[type-1][7-((63-pos)//8)][(63-pos) % 8]
+    if desired_player == True: # If judged player is White
         return white_value - black_value
-    else:
+        
+    else: # If judeged player is Black
         return black_value - white_value
+

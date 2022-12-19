@@ -1,7 +1,7 @@
 import chess
 
 def antichess_legal_moves(board):
-    chess_move_list = board.pseudo_legal_moves
+    chess_move_list = board.legal_moves
     antichess_move_list = []
     for move in chess_move_list:
         if board.is_capture(move) == True:

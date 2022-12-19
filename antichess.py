@@ -1,6 +1,5 @@
 import chess
 import ac_global
-import valid_move
 import search_engine
 
 def determine_player(player: str):
@@ -21,8 +20,8 @@ def setup_game():
     print(ac_global.board)
 
 def make_a_move():
-    alpha = -100000000
-    beta = 100000000
+    alpha = ac_global.INT_MIN
+    beta = ac_global.INT_MAX
     if ac_global.AI_player == chess.WHITE:
         AI_move_uci = search_engine.pruning_minimax(ac_global.board.fen(), 3, alpha, beta, True, True)[1]
         AI_move = chess.Move.from_uci(AI_move_uci)
