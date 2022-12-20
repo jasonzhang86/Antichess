@@ -2,8 +2,7 @@ import chess
 
 import ac_global
 from ac_exception import *
-
-EVAL = 0
+from ac_evaluation import *
 
 def is_antichess_move(move):
     return ac_global.board.is_capture(move)
@@ -33,7 +32,7 @@ def find_all_possible_moves(board_fen):
 def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
     current_board = chess.Board(board_fen)
     if depth == 0 or current_board.is_game_over():
-        return EVAL
+        return evaluation_position(board_fen)
 
     possible_moves = find_all_possible_moves(board_fen)
 
@@ -43,11 +42,11 @@ def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
         for move in possible_moves:
             board = chess.Board(board_fen)
             board.push(move)
-            res = minimax_pruning(board.fen(), depth-1, alpha, beta, False)
-            if res > maxEval:
-                maxEval = res
-                best_move = move.uci()
-            alpha = max(alpha, res)
+            curEval = minimax_pruning(board.fen(), depth-1, alpha, beta, False)
+            if curEval > maxEval:
+                maxEval = curEval
+                best_move = move
+            alpha = max(alpha, curEval)
             if beta <= alpha:
                 break
         return maxEval, best_move
@@ -57,9 +56,9 @@ def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
         for move in possible_moves:
             board = chess.Board(board_fen)
             board.push(move)
-            res = minimax_pruning(board.fen(), depth-1, alpha, beta, True)
-            minEval = min(minEval, res)
-            beta = min(beta, res)
+            curEval, cur_move = minimax_pruning(board.fen(), depth-1, alpha, beta, True)
+            minEval = min(minEval, curEval)
+            beta = min(beta, curEval)
             if beta <= alpha:
                 break
         return minEval
