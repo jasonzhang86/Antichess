@@ -3,7 +3,7 @@ import ac_global
 
 def print_board():
     if ac_global.DEBUG:
-        print(ac_global.board)
+        print(ac_global.board.unicode(invert_color=True))
 
 def print_game_result():
     if ac_global.DEBUG:
