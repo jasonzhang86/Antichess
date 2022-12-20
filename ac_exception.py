@@ -1,8 +1,8 @@
 class NoLegalAntichessMoveException(Exception):
     pass
 
-class InvalidPlayerTypeException(Exception):
+class IllegalPlayerTypeException(Exception):
     pass
 
-class InvalidMoveException(Exception):
+class IllegalMoveException(Exception):
     pass

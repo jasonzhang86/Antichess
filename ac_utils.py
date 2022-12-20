@@ -1,24 +1,21 @@
 import chess
 import ac_global
-from ac_exception import *
 
-def get_opponent_color():
-    if ac_global.my_player == chess.WHITE:
-        return chess.BLACK
-    elif ac_global.my_player == chess.BLACK:
-        return chess.WHITE
-    else:
-        raise InvalidPlayerTypeException("Player must be one of white and black.")
+def print_board():
+    if ac_global.DEBUG:
+        print(ac_global.board)
 
-def input_by_color(message):
-    if ac_global.board.turn == chess.WHITE:
-        res = input("White " + message)
+def print_game_result():
+    if ac_global.DEBUG:
+        print(ac_global.board.outcome())
+        print(ac_global.board.result())
+
+def print_message(message):
+    if ac_global.DEBUG:
+        print(message)
+
+def chess_color_to_string(color):
+    if color == chess.WHITE:
+        return "WHITE"
     else:
-        res = input("Black " + message)
-    return res
-    
-def print_by_color(message):
-    if ac_global.board.turn == chess.WHITE:
-        print("White " + message)
-    else:
-        print("Black " + message)
+        return "BLACK"
