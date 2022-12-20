@@ -4,7 +4,8 @@ import argparse
 import ac_global
 from ac_exception import *
 from ac_utils import *
-from ac_search import *
+import search_engine
+
 
 def setup_game():
     """
@@ -56,8 +57,9 @@ def make_a_move():
     beta = ac_global.INT_MAX
 
     # determine an optimal move with the two lists
-    optimal_score, optimal_move = minimax_pruning(board_fen=ac_global.board.fen(), depth=5, alpha=alpha, beta=beta, maximizingPlayer=True)
-    print(optimal_move.uci())
+    optimal_score, optimal_move_uci = search_engine.pruning_minimax(board_fen=ac_global.board.fen(), depth=5, alpha=alpha, beta=beta, current_player=ac_global.my_player, desired_player=ac_global.my_player)
+    print(optimal_move_uci)
+    optimal_move = chess.Move.from_uci(optimal_move_uci)
     ac_global.board.push(optimal_move)
 
     # For debugging
