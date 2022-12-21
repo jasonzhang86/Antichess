@@ -2,6 +2,18 @@ import chess
 import numpy as np
 import ac_global
 
+"""
+    The evaluation function used by this antichess program is based on the PeSTO's Evaluation Function.
+
+    Wiki Link: https://www.chessprogramming.org/PeSTO%27s_Evaluation_Function
+
+    The evaluation function uses two set of scores, one for mid game and one for end game.
+    When the game starts, it only uses the mid game scores.
+    As the game progresses, some weight of mid game scores is transfered to the end game scores.
+
+    In addition to the original version, we added Check_Value and Draw_Loss to prioritize check and avoid draw (if it's possible to win).
+""" 
+
 PIECE_TYPES = [chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, chess.KING]
 piece_value = {chess.PAWN: 0, chess.KNIGHT: 1, chess.BISHOP: 1, chess.ROOK: 2, chess.QUEEN: 4, chess.KING: 0}
 
@@ -181,8 +193,8 @@ def evaluation_position(board_fen):
         else:
             check_score = Check_Value
     for piece in PIECE_TYPES:
-        white_position_list = current_board.pieces(piece, True)
-        black_position_list = current_board.pieces(piece, False)
+        white_position_list = current_board.pieces(piece, chess.WHITE)
+        black_position_list = current_board.pieces(piece, chess.BLACK)
         phase_score += (len(white_position_list) + len(black_position_list)) * piece_value[piece]
         phase_score = min(phase_score, 24)
         for pos in white_position_list:

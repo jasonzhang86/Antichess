@@ -14,4 +14,4 @@ INT_MAX = 2e9
 
 ####################################################
 
-DEBUG = True # Flag for debug messagess
+DEBUG = False # Flag for debug messagess

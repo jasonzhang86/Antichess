@@ -9,10 +9,13 @@ def is_antichess_move(move):
     return ac_global.board.is_capture(move)
 
 def find_all_possible_moves(board_fen):
-    # split all possible moves into antichess/regular moves
-    # :antichess move: moves that capture an opponent's piece, if such a move exists, we must make this move.
-    # :regular move: moves that do not caputure an opponent's piece, we only consider such move if 
-    #                there is no antichess move
+    """
+    Split all possible moves into antichess/regular moves.
+
+    antichess move: moves that capture an opponent's piece, if such a move exists, we must make this move.
+    regular move: moves that do not caputure an opponent's piece, we only consider such move if 
+                   there is no antichess move
+    """
     current_board = chess.Board(board_fen)
     possible_moves = list(current_board.legal_moves)
     antichess_moves = []
@@ -31,6 +34,11 @@ def find_all_possible_moves(board_fen):
         raise NoLegalAntichessMoveException("Cannot make a valid antichess move.")
 
 def prioritize_check(board_fen, possible_moves):
+    """
+    An optimation made for tie-breaking moves.
+
+    If there exists multiple moves with the same score, prioritize the check moves.
+    """
     current_board = chess.Board(board_fen)
     check_moves = []
     other_moves = []
@@ -44,7 +52,20 @@ def prioritize_check(board_fen, possible_moves):
     return check_moves + other_moves
 
 def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
+    """
+    A recursive function that performs the minimax strategy.
+
+    In each recursive call:
+        - If the maximizingPlayer is myself, the function picks a move with the highest position score
+        - If the maximizingPlayer is the opponent, the function picks a move with the lowest position score
+
+    alpha and beta are used for pruning.
+
+    depth has to be at least 1. (i.e. we at least consider one step ahead.)
+    """ 
     current_board = chess.Board(board_fen)
+
+    # base case
     if depth == 0 or current_board.is_game_over():
         return [evaluation_position(board_fen), "*"]
 

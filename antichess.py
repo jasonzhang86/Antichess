@@ -6,7 +6,15 @@ from ac_exception import *
 from ac_utils import *
 from ac_search import *
 
-from testplayer import * 
+"""
+    Antichess program for CO 456 Final Project (Fall 2022)
+
+    Python version: 3.9.13
+
+    Prerequisite: python-chess, version 1.9.9 (can be installed using 'pip install chess')
+    Library documentation: https://python-chess.readthedocs.io/en/latest/
+    Github: https://github.com/niklasf/python-chess
+""" 
 
 def setup_game():
     """
@@ -80,8 +88,7 @@ if __name__ == "__main__":
                 break 
         else:
             try:
-                #receive_a_move()
-                make_random_move()
+                receive_a_move()
 
                 # Game should switch turn after opponent makes a move
                 if ac_global.board.turn == ac_global.opponent:
