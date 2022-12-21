@@ -6,6 +6,8 @@ from ac_exception import *
 from ac_utils import *
 from ac_search import *
 
+from testplayer import * 
+
 def setup_game():
     """
     Setup an antichess game.
@@ -56,7 +58,9 @@ def make_a_move():
     beta = ac_global.INT_MAX
 
     # determine an optimal move with the two lists
-    optimal_score, optimal_move = minimax_pruning(board_fen=ac_global.board.fen(), depth=5, alpha=alpha, beta=beta, maximizingPlayer=True)
+    optimal_result = minimax_pruning(board_fen=ac_global.board.fen(), depth=4, alpha=alpha, beta=beta, maximizingPlayer=True)
+    optimal_score = optimal_result[0]
+    optimal_move = optimal_result[1]
     print(optimal_move.uci())
     ac_global.board.push(optimal_move)
 
@@ -76,7 +80,9 @@ if __name__ == "__main__":
                 break 
         else:
             try:
-                receive_a_move()
+                #receive_a_move()
+                make_random_move()
+
                 # Game should switch turn after opponent makes a move
                 if ac_global.board.turn == ac_global.opponent:
                     raise IllegalMoveException("Received an illegal move. Please enter again.")

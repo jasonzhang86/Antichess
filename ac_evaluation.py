@@ -6,12 +6,12 @@ PIECE_TYPES = [chess.PAWN, chess.KNIGHT, chess.BISHOP, chess.ROOK, chess.QUEEN, 
 piece_value = {chess.PAWN: 0, chess.KNIGHT: 1, chess.BISHOP: 1, chess.ROOK: 2, chess.QUEEN: 4, chess.KING: 0}
 
 # Value for mid-game
-mg_Pawn_Value = 100
-mg_Knight_Value = 200
-mg_Bishop_Value = 320
-mg_Rook_Value = 479
-mg_Queen_Value = 929
-mg_King_Value = 60000
+mg_Pawn_Value = 82
+mg_Knight_Value = 337
+mg_Bishop_Value = 365
+mg_Rook_Value = 477
+mg_Queen_Value = 1025
+mg_King_Value = 0
 mg_Chess_Value = {chess.PAWN: mg_Pawn_Value, chess.KNIGHT: mg_Knight_Value, chess.BISHOP: mg_Bishop_Value, 
 chess.ROOK: mg_Rook_Value, chess.QUEEN: mg_Queen_Value, chess.KING: mg_King_Value}
 
@@ -21,21 +21,21 @@ eg_Knight_Value = 281
 eg_Bishop_Value = 297
 eg_Rook_Value = 512
 eg_Queen_Value = 936
-eg_King_Value = 12000
+eg_King_Value = 0
 eg_Chess_Value = {chess.PAWN: eg_Pawn_Value, chess.KNIGHT: eg_Knight_Value, chess.BISHOP: eg_Bishop_Value, 
 chess.ROOK: eg_Rook_Value, chess.QUEEN: eg_Queen_Value, chess.KING: eg_King_Value}
 Check_Value = 10 * 24
 Draw_Loss = 25 * 24
 
 # Square Value for Mid_Game
-mg_Pawn_Square_Value = [0, 0, 0, 0, 0, 0, 0, 0,
-    98, 134, 61, 95, 68, 126, 34, -11,
-    -6,   7,  26,  31,  65,  56, 25, -20,
+mg_Pawn_Square_Value = [0,  0,  0,  0,  0,  0,  0,  0,
+     98, 134,  61,  95,  68, 126, 34, -11,
+     -6,   7,  26,  31,  65,  56, 25, -20,
     -14,  13,   6,  21,  23,  12, 17, -23,
     -27,  -2,  -5,  12,  17,   6, 10, -25,
     -26,  -4,  -4, -10,   3,   3, 33, -12,
     -35,  -1, -20, -23, -15,  24, 38, -22,
-     0,   0,   0,   0,   0,   0,  0,   0]
+      0,   0,   0,   0,   0,   0,  0,   0]
         
 mg_Knight_Square_Value = [-167, -89, -34, -49,  61, -97, -15, -107,
      -73, -41,  72,  36,  23,  62,   7,  -17,
