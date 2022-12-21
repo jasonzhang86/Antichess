@@ -21,3 +21,4 @@ def print_game_result():
     if ac_global.DEBUG:
         print(ac_global.board.outcome().termination)
         print_message(chess_color_to_string(ac_global.board.outcome().winner) + " wins!")
+        

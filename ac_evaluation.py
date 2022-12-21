@@ -205,4 +205,3 @@ def evaluation_position(board_fen):
     else: 
         pure_board_score = ((mg_black_value - mg_white_value) * phase_score + (eg_black_value - eg_white_value) * (24 - phase_score))
         return pure_board_score - is_draw * Draw_Loss + check_score
-
