@@ -3,6 +3,7 @@ Final project for CO456 Fall 2022. Ruling is identical to standard chess, except
   - If the player to move has a legal chess move which captures an opponent’s piece, then the player to move must make a legal chess move which captures an opponent’s piece.  
   
 **Build instruction**:
+  - Please clone the latest version from main branch. (The version for submission will be the latest version on the main branch.)
   - Python version: 3.9.13 (other version might also work)
   - To run the program: python/python3 .\antichess.py [white/black] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Assuming all the files are under the current directory)
   - The program expects one command line argument for determing its player's color.
