@@ -69,9 +69,8 @@ def make_a_move():
     optimal_result = minimax_pruning(board_fen=ac_global.board.fen(), depth=4, alpha=alpha, beta=beta, maximizingPlayer=True)
     optimal_score = optimal_result[0]
     optimal_move = optimal_result[1]
-    print(optimal_move.uci())
     ac_global.board.push(optimal_move)
-
+    print(optimal_move.uci())
     # For debugging
     print_message("My player [{}] moving to {}.".format(chess_color_to_string(ac_global.my_player), optimal_move.uci()))
     print_message("My move has score {}.".format(optimal_score))
@@ -98,4 +97,3 @@ if __name__ == "__main__":
                 print_board()
 
     print_game_result()
-    

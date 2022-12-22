@@ -33,23 +33,25 @@ def find_all_possible_moves(board_fen):
     else:
         raise NoLegalAntichessMoveException("Cannot make a valid antichess move.")
 
-def prioritize_check(board_fen, possible_moves):
+def arrange_moves(board_fen, possible_moves):
     """
     An optimation made for tie-breaking moves.
 
-    If there exists multiple moves with the same score, prioritize the check moves.
+    If there exists multiple moves with the same score, prioritize the promotion moves and the check moves.
     """
     current_board = chess.Board(board_fen)
+    promotion_moves = []
     check_moves = []
-    other_moves = []
+    regular_moves = []
     for move in possible_moves:
-        if current_board.gives_check(move):
+        if move.promotion:
+            promotion_moves.append(move)
+        elif current_board.gives_check(move):
             check_moves.append(move)
         else:
-            other_moves.append(move)
+            regular_moves.append(move)
     random.shuffle(check_moves)
-    random.shuffle(other_moves)
-    return check_moves + other_moves
+    return promotion_moves + check_moves + regular_moves
 
 def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
     """
@@ -72,9 +74,16 @@ def minimax_pruning(board_fen, depth, alpha, beta, maximizingPlayer):
     possible_moves = find_all_possible_moves(board_fen)
 
     if maximizingPlayer:
-        improved_possible_moves = prioritize_check(board_fen, possible_moves)
         maxEval = ac_global.INT_MIN
         best_move = None
+        improved_possible_moves = arrange_moves(board_fen, possible_moves)
+
+        # If every move in improved_possible_moves places the king in a position that can be checked by opponent's next step,
+        # then this method would fail to update maxEval and thus give None as best_move.
+        # Therefore we add this check to pick the first move as a placeholder.
+        if improved_possible_moves:
+            best_move = improved_possible_moves[0]
+
         for move in improved_possible_moves:
             board = chess.Board(board_fen)
             board.push(move)
