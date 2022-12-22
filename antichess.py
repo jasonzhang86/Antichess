@@ -47,7 +47,7 @@ def receive_a_move():
     If receives an illegal move, reject it and expect a new move from input (until a legal move is given).
     """  
     try:
-        uci = input("Waiting for opponent to enter a move: ")
+        uci = input()
         move = chess.Move.from_uci(uci)
 
         if ac_global.board.is_legal(move):
