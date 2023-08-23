@@ -21,7 +21,3 @@ Final project for the Game Theory course in Fall 2022. Ruling is identical to st
  **Other information**:
   - Before running the program, please make sure the "DEBUG" flag in the ac_global.py file is set to FALSE. (Otherwise it will print out the debug messages as well which will influence the match)  
   - When running the program, if error is encountered and is one of "NoLegalAntichessMoveException", "IllegalPlayerTypeException" and "IllegalMoveException", then it indicates detection of illegal behaviour. (though theoretically such behaviour will be detected by the software running the matches)
-  
-  
-Team "Hide on Qijia Bridge"
-  
